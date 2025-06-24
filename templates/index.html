@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Movie Recommendation System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f3f3;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    .container {
+      background-color: white;
+      border-radius: 8px;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .links {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    a.button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    a.button:hover {
+      background-color: #0056b3;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Movie Recommendation System</h1>
+
+    <p>
+      Welcome to the Movie Recommendation System! This web app demonstrates a collaborative filtering-based recommendation engine using two models:
+    </p>
+    <ul>
+      <li><strong>Cosine Similarity</strong> – based on user ratings similarity</li>
+      <li><strong>Matrix Factorization (SVD)</strong> – using latent user and item features</li>
+    </ul>
+
+    <p>
+      The system also includes interactive <strong>data visualizations</strong> to help understand the dataset, including rating distributions, similarity heatmaps, and PCA embeddings.
+    </p>
+
+    <div class="links">
+      <a class="button" href="/data-visualisation">View Data Visualisations</a>
+      <a class="button" href="/all-movies">Get Movie Recommendations</a>
+    </div>
+  </div>
+</body>
+</html>

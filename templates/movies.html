@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Movies</title>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    table { width: 100%; }
+    .star {
+      cursor: pointer;
+      font-size: 18px;
+      color: lightgray;
+    }
+    .star.checked {
+      color: gold;
+    }
+    #submitBtn {
+      margin-top: 20px;
+      padding: 10px 15px;
+    }
+    #recommendCount {
+      width: 50px;
+    }
+    .back-button {
+      display: block;
+      margin-bottom: 1rem;
+      font-weight: bold;
+      color: #0d6efd;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<a href="/" class="back-button">&larr; Home</a>
+    
+<h2>All Movies</h2>
+
+<label for="recommendCount">Number of recommendations:</label>
+<input type="number" id="recommendCount" min="1" max="20" value="5">
+<button id="submitBtn">Get Recommendations</button>
+
+<table id="moviesTable" class="display">
+  <thead>
+    <tr>
+      <th>Movie ID</th>
+      <th>Title</th>
+      <th>Genres</th>
+      <th>IMDb ID</th>
+      <th>TMDb ID</th>
+      <th>Your Rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for movie in movies %}
+    <tr>
+      <td>{{ movie.item_id }}</td>
+      <td>{{ movie.title }}</td>
+      <td>{{ movie.genres }}</td>
+      <td>
+        {% if movie.imdbId %}
+          <a href="https://www.imdb.com/title/tt{{ '%07d'|format(movie.imdbId|int) }}" target="_blank">tt{{ '%07d'|format(movie.imdbId|int) }}</a>
+        {% else %} N/A {% endif %}
+      </td>
+      <td>
+        {% if movie.tmdbId %}
+          <a href="https://www.themoviedb.org/movie/{{ movie.tmdbId }}" target="_blank">{{ movie.tmdbId }}</a>
+        {% else %} N/A {% endif %}
+      </td>
+      <td>
+        <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<!-- JS Libraries -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#moviesTable').DataTable({ "pageLength": 30 });
+
+    // Star rating logic
+    $('#moviesTable').on('click', '.star', function () {
+      const $this = $(this);
+      const $td = $this.closest('td');
+      const rating = $this.data('value');
+
+      $td.find('.star').each(function () {
+        $(this).toggleClass('checked', $(this).data('value') <= rating);
+      });
+    });
+
+    // Submit button logic
+    $('#submitBtn').click(function () {
+      const ratings = [];
+      $('#moviesTable tbody tr').each(function () {
+        const $row = $(this);
+        const item_id = parseInt($row.find('td:first').text());
+        const ratedStars = $row.find('.star.checked').length;
+        if (ratedStars > 0) {
+          ratings.push({ item_id: item_id, rating: ratedStars });
+        }
+      });
+
+      const numRecs = parseInt($('#recommendCount').val());
+
+      fetch('/get-recommendations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ratings: ratings,
+          num_recommendations: numRecs
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+            fetch('/show-recommendations', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.text())
+        .then(html => {
+            document.open();
+            document.write(html);
+            document.close();
+        })
+      })
+      .catch(err => {
+        console.error(err);
+        alert('Error fetching recommendations.');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

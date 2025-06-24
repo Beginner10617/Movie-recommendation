@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommendations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+        }
+        .table-container {
+            flex: 1;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #333;
+            color: white;
+        }
+        caption {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .back-button {
+        display: block;
+        margin-bottom: 1rem;
+        font-weight: bold;
+        color: #0d6efd;
+        text-decoration: none;
+        }
+
+        .back-button:hover {
+        text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-button">&larr; Home</a>
+
+    <div class="table-container">
+        <caption>Cosine Similarity</caption>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Movie Title</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie in model1 %}
+                <tr>
+                <td>{{ loop.index }}</td>  {# loop.index starts from 1 (loop.index0 from 0) #}
+                <td>{{ movie }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-container">
+        <caption>Matrix Factorisation (SVD)</caption>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Movie Title</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie in model2 %}
+                <tr>
+                <td>{{ loop.index }}</td>  {# loop.index starts from 1 (loop.index0 from 0) #}
+                <td>{{ movie }}</td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
