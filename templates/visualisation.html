@@ -110,6 +110,17 @@
 
     {% else %}
       {% include "plots/svd_embeddings.html" %}
+      <div style="margin-top: 20px; padding: 10px; background-color: #f9f9f9; border-left: 4px solid #4CAF50;">
+      <strong>SVD Embedding Scatter Plot</strong>
+      <p>
+        This scatter plot projects movies into a 2D space using the top two latent features derived via 
+        <strong>Singular Value Decomposition (SVD)</strong> from the user-movie ratings matrix. 
+        Each point represents a movie, and their relative positions reflect how similar or different 
+        they are based on user preferences. Clusters may emerge for genres or films with similar audience reception,
+        making it easier to visually explore patterns in the recommendation space.
+      </p>
+    </div>
+
     {% endif %}
   </div>
 
