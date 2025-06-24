@@ -112,8 +112,8 @@ The dataset includes:
 
 For feedback, queries, or collaboration, feel free to reach out via:
 
-📧 **Email**: [your_email@example.com]  
-🐙 **GitHub**: [https://github.com/yourusername](https://github.com/yourusername)
+📧 **Email**: [wasihusain23@iitk.ac.in]  
+🐙 **GitHub**: [https://github.com/Beginner10617](https://github.com/Beginner10617)
 
 ---
 
