@@ -34,6 +34,9 @@ Visualise the dataset using:
     ```
     http://127.0.0.1:5000/plots/cosine_heatmap?top=10&shiftX=0&shiftY=0
     ```
+- **SVD Embedding Scatter Plot**  
+A 2D scatter plot of movies based on matrix factorization using Truncated SVD.  
+Each point represents a movie, projected onto two latent dimensions extracted from user-movie rating behavior. Clusters often indicate similar genres or audience preferences.
 
 ---
 
