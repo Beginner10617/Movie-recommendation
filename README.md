@@ -113,10 +113,8 @@ The dataset includes:
 
 ## 📬 Contact
 
-For feedback, queries, or collaboration, feel free to reach out via:
-
-📧 **Email**: [wasihusain23@iitk.ac.in]  
-🐙 **GitHub**: [https://github.com/Beginner10617](https://github.com/Beginner10617)
+- **Email:** wasihusain23@iitk.ac.in
+- **GitHub**: [https://github.com/Beginner10617](https://github.com/Beginner10617)
 
 ---
 
